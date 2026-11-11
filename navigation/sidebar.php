@@ -1,3 +1,8 @@
+<?php
+define('BASE_URL', '/pemweb/project-read-flags/'); //ganti sesuai path project
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
+
 <script>
   document.body.classList.toggle('sb-collapsed', !window.matchMedia('(min-width: 992px)').matches);
 </script>
@@ -20,24 +25,24 @@
 
     <div class="nav flex-column px-2">
       <div class="add pb-3">
-        <a href="#" class="button-add text-decoration-none">
+        <a href="<?= BASE_URL ?>library/add_book.php" class="button-add text-decoration-none">
           <i class="bi bi-plus" style="font-size: 20px;"></i>
           <span class="text-add">Add</span>
         </a>
       </div>
-      <a href="#" class="sidebar-link active text-decoration-none">
+      <a href="<?= BASE_URL ?>dashboard.php" class="sidebar-link text-decoration-none <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
         <i class="bi bi-house"></i>
         <span>Home</span>
       </a>
-      <a href="#" class="sidebar-link text-decoration-none">
+      <a href="<?= BASE_URL ?>library/library.php" class="sidebar-link text-decoration-none <?= $currentPage == 'library.php' ? 'active' : '' ?>">
         <i class="bi bi-book"></i>
         <span>Library</span>
       </a>
-      <a href="#" class="sidebar-link text-decoration-none">
+      <a href="<?= BASE_URL ?>" class="sidebar-link text-decoration-none">
         <i class="bi bi-journal"></i>
         <span>Reviews</span>
       </a>
-      <a href="#" class="sidebar-link text-decoration-none">
+      <a href="<?= BASE_URL ?>" class="sidebar-link text-decoration-none">
         <i class="bi bi-person"></i>
         <span>Profile</span>
       </a>

@@ -30,7 +30,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           <span class="text-add">Add</span>
         </a>
       </div>
-      <a href="<?= BASE_URL ?>dashboard.php" class="sidebar-link text-decoration-none <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
+      <a href="<?= BASE_URL ?>dashboard/dashboard.php" class="sidebar-link text-decoration-none <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
         <i class="bi bi-house"></i>
         <span>Home</span>
       </a>

@@ -25,7 +25,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     <div class="nav flex-column px-2">
       <div class="add pb-3">
-        <a href="<?= BASE_URL ?>library/add_book.php" class="button-add text-decoration-none">
+        <a class="button-add text-decoration-none" id="btn-tambah-buku">
           <i class="bi bi-plus" style="font-size: 20px;"></i>
           <span class="text-add">Add</span>
         </a>

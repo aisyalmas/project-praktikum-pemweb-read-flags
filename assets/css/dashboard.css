@@ -35,6 +35,10 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--light-pink);
 }
 
+.text-pink-strong {
+    color: var(--pink);
+}
+
 .text-white {
     color: white;
 }
@@ -56,14 +60,14 @@ h1, h2, h3, h4, h5, h6 {
 .text-bg-active {
     background-color: #3E0F2A;
     border: solid var(--gray) 1px;
-    width: 60px;
+    width: auto;
     font-weight: normal;
 }
 
 .text-bg-custom {
     background-color: #1C1418;
     border: solid #3E0F2A 1px;
-    width: 60px;
+    width: auto;
     font-weight: normal;
 }
 

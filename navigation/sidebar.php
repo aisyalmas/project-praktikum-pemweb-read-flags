@@ -1,7 +1,9 @@
 <script>
   document.body.classList.toggle('sb-collapsed', !window.matchMedia('(min-width: 992px)').matches);
 </script>
-
+<?php
+  require_once __DIR__ . '/../config/config.php';
+?>
 <div class="d-flex">
   <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed" id="sidebar">
 
@@ -33,13 +35,21 @@
         <i class="bi bi-book"></i>
         <span>Library</span>
       </a>
-      <a href="#" class="sidebar-link text-decoration-none">
+      <a href="<?= BASE_URL ?>/review/review.php" class="sidebar-link text-decoration-none">
         <i class="bi bi-journal"></i>
         <span>Reviews</span>
       </a>
-      <a href="#" class="sidebar-link text-decoration-none">
+      <a href="<?= BASE_URL ?>/profile/profile.php" class="sidebar-link text-decoration-none">
         <i class="bi bi-person"></i>
         <span>Profile</span>
+      </a>
+    </div>
+
+    <!-- [TAMBAH] logout di dasar sidebar -->
+    <div class="sidebar-footer mt-auto px-2 pb-3">
+      <a href="<?= BASE_URL ?>/auth/logout.php" class="sidebar-link logout-link text-decoration-none" aria-label="Logout">
+        <i class="bi bi-box-arrow-left"></i>
+        <span>Logout</span>
       </a>
     </div>
   </nav>

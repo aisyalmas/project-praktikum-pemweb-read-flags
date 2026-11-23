@@ -1,5 +1,4 @@
 <?php
-define('BASE_URL', '/pemweb/project-read-flags/'); //ganti sesuai path project
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
@@ -32,19 +31,19 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           <span class="text-add">Add</span>
         </a>
       </div>
-      <a href="<?= BASE_URL ?>dashboard/dashboard.php" class="sidebar-link text-decoration-none <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
+      <a href="<?= BASE_URL ?>/dashboard/dashboard.php" class="sidebar-link text-decoration-none <?= $currentPage == 'dashboard.php' ? 'active' : '' ?>">
         <i class="bi bi-house"></i>
         <span>Home</span>
       </a>
-      <a href="<?= BASE_URL ?>library/library.php" class="sidebar-link text-decoration-none <?= $currentPage == 'library.php' ? 'active' : '' ?>">
+      <a href="<?= BASE_URL ?>/library/library.php" class="sidebar-link text-decoration-none <?= $currentPage == 'library.php' ? 'active' : '' ?>">
         <i class="bi bi-book"></i>
         <span>Library</span>
       </a>
-      <a href="<?= BASE_URL ?>/review/review.php" class="sidebar-link text-decoration-none">
+      <a href="<?= BASE_URL ?>/review/review.php" class="sidebar-link text-decoration-none <?= $currentPage == 'review.php' ? 'active' : '' ?>">
         <i class="bi bi-journal"></i>
         <span>Reviews</span>
       </a>
-      <a href="<?= BASE_URL ?>/profile/profile.php" class="sidebar-link text-decoration-none">
+      <a href="<?= BASE_URL ?>/profile/profile.php" class="sidebar-link text-decoration-none <?= $currentPage == 'profile.php' ? 'active' : '' ?>">
         <i class="bi bi-person"></i>
         <span>Profile</span>
       </a>

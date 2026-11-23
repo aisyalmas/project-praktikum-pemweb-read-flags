@@ -4,8 +4,8 @@ include '../config/koneksi.php';
 
 header('Content-Type: application/json');
 
-if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true) {
-    header("location: login.php");
+if (!isset($_SESSION['user_id'])) {
+    header("location: ../auth/login.php");
     exit();
 }
 $userId = (int) $_SESSION['user_id'];

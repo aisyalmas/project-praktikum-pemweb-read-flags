@@ -46,7 +46,7 @@
         $_SESSION['user_name']= $user['name'];
         $_SESSION['user_email']= $user['email'];
 
-        header("location:../index.php");
+        header("location:../dashboard/dashboard.php");
         exit;
     };
 

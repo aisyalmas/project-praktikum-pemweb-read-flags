@@ -1,6 +1,8 @@
 <?php
-$loginUrl = "login.php";
-$registerUrl = "register.php";
+require_once __DIR__ . '/config/config.php';
+
+$loginUrl = BASE_URL . '/auth/login.php';
+$registerUrl = BASE_URL . '/auth/register.php';
 ?>
 
 <!DOCTYPE html>

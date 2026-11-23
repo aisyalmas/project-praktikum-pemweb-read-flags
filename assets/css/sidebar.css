@@ -165,3 +165,54 @@
     align-items: center;
     justify-content: center;
 }
+
+.modal-header {
+    background-color: var(--dark);
+    color: white;
+    border-radius: 25px 25px 0 0;
+}
+
+.modal-body {
+    background-color: var(--cream);
+}
+
+.modal-content {
+    border-radius: 25px;
+}
+
+.modal-tab {
+    color: var(--gray);
+    font-family: var(--font-main);
+}
+
+.modal-tab:hover {
+    color: var(--pink);
+    font-family: var(--font-main);
+}
+
+.modal-tab.active {
+    color: var(--dark);
+    font-family: var(--font-main);
+}
+
+.modal-tab.active {
+    border-bottom-color: var(--pink) !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.list-book-cover{
+    /* height: 100px; */
+    width: 50px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+}

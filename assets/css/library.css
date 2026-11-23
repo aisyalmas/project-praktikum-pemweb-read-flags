@@ -1,0 +1,58 @@
+.lib-tab {
+    color: var(--gray);
+    font-family: var(--font-heading);
+}
+
+.lib-tab:hover {
+    color: var(--pink);
+    font-family: var(--font-heading);
+}
+
+.lib-tab:active {
+    color: var(--dark);
+    font-family: var(--font-heading);
+}
+
+.lib-tab.active {
+    border-bottom-color: var(--pink) !important;
+}
+
+.lib-pill {
+    background-color: #fff;
+    border: 1px solid var(--stroke);
+    color: var(--dark);
+    padding: 0.35rem 1rem;
+}
+
+.lib-pill:hover {
+    background-color: #fff;
+    border: 1px solid var(--stroke);
+}
+
+.lib-pill.active {
+    background-color: #F4D8E2;
+    border-color: var(--light-pink);
+    color: var(--dark);
+    font-weight: bold;
+}
+
+.grid-book-cover{
+    /* aspect-ratio: 1 / 1; */
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.rating {
+    color: var(--pink);
+}
+
+.card-klik {
+    cursor: pointer;
+    transition: box-shadow 0.15s ease;
+}
+
+.card-klik:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+

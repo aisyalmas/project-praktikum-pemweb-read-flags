@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="row justify-content-between mt-3">
                                     <div class="col-3">
-                                        <img id="n-cover" src="../assets/images/cover-babel.jpg" alt="" class="cover-book">
+                                        <img id="n-cover" src="../assets/images/nocover.jpg" alt="" class="cover-book">
                                     </div>
                                     <div class="col-9">
                                         <h3 class="text-white" id="n-judul">-</h3>
@@ -195,7 +195,7 @@
                                         <div class="shelf-books d-flex align-items-end gap-3" id="shelf-buku" style="min-height: 150px;"></div>
 
                                         <div class="curated-card d-flex align-items-center gap-3 p-3 mb-3" id="curated-card">
-                                            <img src="../assets/images/cover-babel.jpg" alt="" class="curated-cover" id="c-cover">
+                                            <img src="../assets/images/nocover.jpg" alt="" class="curated-cover" id="c-cover">
                                             <div>
                                                 <span class="tag-pink fs-9">CURATED FOR YOU</span>
                                                 <h6 class="font-serif fw-bold mt-1 mb-0" id="c-judul">-</h6>
@@ -320,7 +320,7 @@
                             <div class="fs-11 text-pink-strong fw-bold mb-2">details</div>
                             <div class="d-flex justify-content-between fs-13 border-bottom py-1"><span class="text-gray">pages</span><span id="o-halaman-total">-</span></div>
                             <div class="d-flex justify-content-between fs-13 border-bottom py-1"><span class="text-gray">publisher</span><span id="o-penerbit">-</span></div>
-                            <div class="d-flex justify-content-between fs-13 border-bottom py-1"><span class="text-gray">tahun terbit</span><span id="o-tahun">-</span></div>
+                            <div class="d-flex justify-content-between fs-13 border-bottom py-1"><span class="text-gray">publication year</span><span id="o-tahun">-</span></div>
                             <div class="d-flex justify-content-between fs-13 py-1"><span class="text-gray">isbn</span><span id="o-isbn">-</span></div>
                         </div>
 
@@ -336,18 +336,18 @@
 
                         <div class="card p-3">
                             <div class="fs-11 text-pink-strong fw-bold mb-2">owning it</div>
-                            <div class="d-flex justify-content-between fs-13"><span class="text-gray">ditambahkan</span><span id="o-ditambahkan">-</span></div>
+                            <div class="d-flex justify-content-between fs-13"><span class="text-gray">added</span><span id="o-ditambahkan">-</span></div>
                         </div>
                     </div>
 
                     <!-- ABOUT THE BOOK -->
                     <div class="modal-panel d-none" id="panel-tentang">
                         <div class="mb-3">
-                            <label class="form-label fs-13 fw-bold">Deskripsi</label>
+                            <label class="form-label fs-13 fw-bold text-pink-strong">description</label>
                             <textarea class="form-control" id="f-deskripsi" rows="6"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fs-13 fw-bold">Genre</label>
+                            <label class="form-label fs-13 fw-bold text-pink-strong">genre</label>
                             <select class="form-select" id="f-genre"></select>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                     <!-- MY READING -->
                     <div class="modal-panel d-none" id="panel-baca">
                         <div class="mb-3">
-                            <label class="form-label fs-13 fw-bold">Status</label>
+                            <label class="form-label fs-13 fw-bold text-pink-strong">status</label>
                             <select class="form-select" id="f-status">
                                 <option value="reading">reading</option>
                                 <option value="read">read</option>
@@ -366,7 +366,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label fs-13 fw-bold">Rating</label>
+                            <label class="form-label fs-13 fw-bold text-pink-strong">rating</label>
                             <select class="form-select" id="f-rating">
                                 <option value="0">belum dinilai</option>
                                 <option value="1">1 bintang</option>
@@ -379,7 +379,7 @@
 
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label fs-13 fw-bold">Total halaman</label>
+                                <label class="form-label fs-13 fw-bold text-pink-strong">total pages</label>
                                 <div class="input-group">
                                     <button type="button" class="btn btn-outline-dark" data-step="-1" data-target="f-total">-</button>
                                     <input type="number" class="form-control text-center" id="f-total" min="0" value="0">
@@ -387,7 +387,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fs-13 fw-bold">Halaman saat ini</label>
+                                <label class="form-label fs-13 fw-bold text-pink-strong">current page</label>
                                 <div class="input-group">
                                     <button type="button" class="btn btn-outline-dark" data-step="-1" data-target="f-halaman-baca">-</button>
                                     <input type="number" class="form-control text-center" id="f-halaman-baca" min="0" value="0">
@@ -398,11 +398,11 @@
 
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label fs-13 fw-bold">Mulai baca</label>
+                                <label class="form-label fs-13 fw-bold text-pink-strong">start date</label>
                                 <input type="date" class="form-control" id="f-mulai">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fs-13 fw-bold">Selesai baca</label>
+                                <label class="form-label fs-13 fw-bold text-pink-strong">finish date</label>
                                 <input type="date" class="form-control" id="f-selesai">
                             </div>
                         </div>
@@ -411,26 +411,26 @@
                     <!-- SERIES -->
                     <div class="modal-panel d-none" id="panel-seri">
                         <div class="mb-3">
-                            <label class="form-label fs-13 fw-bold">Series</label>
+                            <label class="form-label fs-13 fw-bold text-pink-strong">series</label>
                             <select class="form-select" id="f-seri"></select>
                         </div>
                         <div class="mb-3 d-none" id="blok-seri-baru">
-                            <label class="form-label fs-13 fw-bold">Nama series baru</label>
+                            <label class="form-label fs-13 fw-bold text-pink-strong">new series name</label>
                             <input type="text" class="form-control" id="f-seri-baru" placeholder="contoh: Dune">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fs-13 fw-bold">Urutan di series</label>
+                            <label class="form-label fs-13 fw-bold text-pink-strong">series order</label>
                             <input type="number" step="0.1" min="0" class="form-control" id="f-urutan" placeholder="contoh: 1">
                         </div>
                     </div>
 
                     <!-- COLLECTION -->
                     <div class="modal-panel d-none" id="panel-koleksi">
-                        <p class="fs-13 text-gray mb-2">Klik untuk memilih. Yang berwarna gelap berarti dipilih.</p>
+                        <p class="fs-13 text-gray mb-2">click to select. highlighted items are selected.</p>
                         <div id="f-koleksi-pills" class="d-flex flex-wrap gap-2 mb-3"></div>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="f-koleksi-baru" placeholder="nama koleksi baru">
-                            <button type="button" class="btn btn-outline-dark" id="btn-buat-koleksi">+ buat</button>
+                            <input type="text" class="form-control" id="f-koleksi-baru" placeholder="new collection name">
+                            <button type="button" class="btn btn-outline-dark" id="btn-buat-koleksi">+ create</button>
                         </div>
                     </div>
 

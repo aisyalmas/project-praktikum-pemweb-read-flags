@@ -10,7 +10,7 @@ let pilihKoleksiBaru = [];
 let detailAktif = null;
 let dataDetail = null;
 
-const COVER_KOSONG = '../assets/images/cover-babel.jpg';
+const COVER_KOSONG = '../assets/images/nocover.jpg';
 
 const WARNA = {
     reading: 'success',
@@ -53,9 +53,9 @@ async function kirimJSON(url, data) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        const hasil = await res.json();
+        const hasil = await res.json().catch(() => ({}));
 
-        if (!res.ok) {
+        if (!res.ok || hasil.success !== true) {
             tampilToast(hasil.error || 'Failed to save.', false);
             return false;
         }
@@ -70,8 +70,8 @@ async function kirimJSON(url, data) {
 async function ambilData() {
     try {
         const [resBuku, resGrup] = await Promise.all([
-            fetch('get_books.php'),
-            fetch('get_groups.php')
+            fetch('api.php?data=books'),
+            fetch('api.php?data=groups')
         ]);
 
         const dataBuku = await resBuku.json();
@@ -429,7 +429,7 @@ document.getElementById('form-baru').addEventListener('submit', async function (
 });
 
 async function kirimAksiTanpaDetail(data, pesanSukses) {
-    const ok = await kirimJSON('action_book.php', data);
+    const ok = await kirimJSON('api.php', data);
     if (ok) {
         tampilToast(pesanSukses);
         await ambilData();
@@ -561,6 +561,7 @@ document.getElementById('form-buku').addEventListener('submit', async function (
     const seriDipilih = document.getElementById('f-seri').value;
 
     const dataBaru = {
+        action: 'simpan-buku',
         book_id: this.dataset.id,
         status: document.getElementById('f-status').value,
         rating: Number(document.getElementById('f-rating').value),
@@ -577,7 +578,7 @@ document.getElementById('form-buku').addEventListener('submit', async function (
         collection_baru: pilihKoleksiBaru
     };
 
-    const ok = await kirimJSON('update_book.php', dataBaru);
+    const ok = await kirimJSON('api.php', dataBaru);
     if (ok) {
         sembunyiModal('modal-buku');
         tampilToast('Book changes saved.');
@@ -608,7 +609,7 @@ document.getElementById('btn-hapus-buku').addEventListener('click', async functi
     const bukuId = document.getElementById('form-buku').dataset.id;
     if (!confirm('Remove this book from your shelf? The book data will stay in the database.')) return;
 
-    const ok = await kirimJSON('update_book.php', { action: 'hapus', book_id: bukuId });
+    const ok = await kirimJSON('api.php', { action: 'hapus-buku', book_id: bukuId });
     if (ok) {
         sembunyiModal('modal-buku');
         tampilToast('Book removed from shelf.');
@@ -766,16 +767,25 @@ async function bukaModalDetail(tipe, id) {
 }
 
 async function ambilDetail() {
-    const res = await fetch(`get_detail.php?tipe=${detailAktif.tipe}&id=${detailAktif.id}`);
-    const hasil = await res.json();
+    try {
+        const url = 'api.php?data=detail' +
+            '&tipe=' + encodeURIComponent(detailAktif.tipe) +
+            '&id=' + encodeURIComponent(detailAktif.id);
+        const res = await fetch(url);
+        const hasil = await res.json().catch(() => ({}));
 
-    if (!res.ok) {
-        tampilToast(hasil.error || 'Failed to load details.', false);
+        if (!res.ok) {
+            tampilToast(hasil.error || 'Failed to load details.', false);
+            return false;
+        }
+
+        dataDetail = hasil;
+        return true;
+    } catch (error) {
+        console.error(error);
+        tampilToast('Failed to load details.', false);
         return false;
     }
-
-    dataDetail = hasil;
-    return true;
 }
 
 function tampilDetail() {
@@ -941,7 +951,7 @@ function totalHari(daftar) {
 
 async function kirimAksi(data, tombol = null, pesanSukses = 'Saved.') {
     setLoading(tombol, true);
-    const ok = await kirimJSON('action_book.php', data);
+    const ok = await kirimJSON('api.php', data);
     setLoading(tombol, false);
 
     if (!ok) return false;

@@ -42,7 +42,7 @@ function aman(teks) {
 }
 
 function sampul(b) {
-    return b.cover_url || '../assets/images/cover-babel.jpg';
+    return b.cover_url || '../assets/images/nocover.jpg';
 }
 
 function pesanKosong(pesan) {
@@ -87,26 +87,28 @@ function setLoading(tombol, sedang) {
 function pastikanModalCari() {
     if (modalCariSudahDipasang) return;
 
-    document.body.insertAdjacentHTML('beforeend', `
-        <div class="modal fade" id="modal-cari" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header d-flex align-items-center gap-2">
-                        <button type="button" class="btn btn-outline-light btn-sm rounded-pill d-none" id="cari-kembali">back</button>
-                        <h5 class="modal-title" id="cari-judul">add books</h5>
-                        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="view-cari">
-                            <input type="search" id="cari-input" class="form-control rounded-pill mb-3"
-                                placeholder="search title or author...">
-                            <div id="cari-hasil"></div>
+    if (!document.getElementById('modal-cari')) {
+        document.body.insertAdjacentHTML('beforeend', `
+            <div class="modal fade" id="modal-cari" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex align-items-center gap-2">
+                            <button type="button" class="btn btn-outline-light btn-sm rounded-pill d-none" id="cari-kembali">back</button>
+                            <h5 class="modal-title" id="cari-judul">add books</h5>
+                            <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"></button>
                         </div>
-                        <div id="view-tambah" class="d-none"></div>
+                        <div class="modal-body">
+                            <div id="view-cari">
+                                <input type="search" id="cari-input" class="form-control rounded-pill mb-3"
+                                    placeholder="search title or author...">
+                                <div id="cari-hasil"></div>
+                            </div>
+                            <div id="view-tambah" class="d-none"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>`);
+            </div>`);
+    }
 
     pasangEventModalCari();
     modalCariSudahDipasang = true;
@@ -139,8 +141,17 @@ async function cariBuku(q) {
         return;
     }
 
-    const res = await fetch(`../library/search_book.php?q=${encodeURIComponent(q)}`);
-    hasilCari = await res.json();
+    try {
+        const res = await fetch(`../library/api.php?data=search&q=${encodeURIComponent(q)}`);
+        hasilCari = res.ok ? await res.json() : [];
+        if (!res.ok) {
+            tampilToast('Failed to search books.', false);
+        }
+    } catch (error) {
+        console.error(error);
+        tampilToast('Connection problem, try again.', false);
+        hasilCari = [];
+    }
     gambarHasilCari();
 }
 
@@ -209,7 +220,7 @@ function gambarTambah() {
 }
 
 async function simpanStatus(tombol, status) {
-    const res = await fetch('../library/action_book.php', {
+    const res = await fetch('../library/api.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

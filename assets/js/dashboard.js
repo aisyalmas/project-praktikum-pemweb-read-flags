@@ -5,7 +5,7 @@ let rakFilter = 'tbr';
 let pilihKoleksi = [];
 let pilihKoleksiBaru = [];
 let logBukuId = null;
-const COVER_KOSONG = '../assets/images/cover-babel.jpg';
+const COVER_KOSONG = '../assets/images/nocover.jpg';
 const LABEL_RAK = { tbr: 'up next', reading: 'reading', wishlist: 'wishlist' };
 
 function tampilModal(id) {
@@ -45,9 +45,9 @@ async function kirimPOST(url, data) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        const hasil = await res.json();
+        const hasil = await res.json().catch(() => ({}));
 
-        if (!res.ok) {
+        if (!res.ok || hasil.success !== true) {
             tampilToast(hasil.error || 'Failed to save.', false);
             return false;
         }
@@ -63,9 +63,13 @@ async function muatDashboard() {
     try {
         const [resDash, resBuku, resGrup] = await Promise.all([
             fetch('get_dashboard.php'),
-            fetch('../library/get_books.php'),
-            fetch('../library/get_groups.php')
+            fetch('../library/api.php?data=books'),
+            fetch('../library/api.php?data=groups')
         ]);
+
+        if (!resDash.ok || !resBuku.ok || !resGrup.ok) {
+            throw new Error('Failed to load dashboard.');
+        }
 
         dash = await resDash.json();
         libBuku = await resBuku.json();
@@ -88,7 +92,7 @@ function gambarSemua() {
 
 function gambarNowReading() {
     const n = dash.now_reading;
-    const persen = n ? n.percent : 0;
+    const persen = n ? Math.min(100, Math.max(0, Number(n.percent) || 0)) : 0;  
 
     document.getElementById('n-cover').src = (n && n.cover_url) || COVER_KOSONG;
     document.getElementById('n-judul').textContent = n ? n.title : 'no book being read yet';
@@ -107,12 +111,16 @@ function gambarNowReading() {
 
     let perkiraan = '-';
     if (n && dash.pace > 0) {
-        const sisa = Math.max(0, n.page_count - n.current_page);
+        const sisa = Math.max(0, Number(n.page_count) - Number(n.current_page));
         perkiraan = Math.ceil(sisa / dash.pace) + ' days';
     }
     document.getElementById('n-finish').textContent = perkiraan;
 
-    document.getElementById('btn-log-now').dataset.id = n ? n.id : '';
+    const tombolLog = document.getElementById('btn-log-now');
+
+    tombolLog.dataset.id = n ? n.id : '';
+    tombolLog.disabled = !n;
+    tombolLog.title = n ? '' : 'add a book with reading status first.';
 }
 
 function gambarStreak() {
@@ -185,7 +193,7 @@ function gambarTugas() {
     const jumlahSegmen = Math.min(daftar.length, 10);
     let segmen = '';
     for (let i = 0; i < jumlahSegmen; i++) {
-        const aktif = i < Math.round(selesai / daftar.length * jumlahSegmen);
+        const aktif = daftar.length > 0 && i < Math.round(selesai / daftar.length * jumlahSegmen);
         segmen += `<div class="seg-bar ${aktif ? 'active' : ''}"></div>`;
     }
     document.getElementById('tugas-segmen').innerHTML = segmen;
@@ -194,7 +202,7 @@ function gambarTugas() {
         <div class="task-item d-flex align-items-center gap-2 py-2" role="button" data-task-centang="${t.id}">
             <span class="task-check ${t.is_done ? 'checked' : ''}"></span>
             <span class="flex-grow-1 fs-13 ${t.is_done ? 'text-decoration-line-through text-gray' : ''}">${aman(t.title)}</span>
-        </div>`).join('') || pesanKosong('No tasks yet.');
+        </div>`).join('') || pesanKosong('no tasks yet.');
 
     gambarDaftarTugas();
 }
@@ -209,7 +217,7 @@ function gambarDaftarTugas() {
             <button type="button" class="btn btn-sm btn-link text-danger p-0" data-task-hapus="${t.id}">
                 <i class="bi bi-x-lg"></i>
             </button>
-        </div>`).join('') || pesanKosong('No tasks yet. Add one above first.');
+        </div>`).join('') || pesanKosong('no tasks yet. Add one above first.');
 }
 
 async function centangTugas(id) {
@@ -234,7 +242,7 @@ function gambarChallenge() {
         document.getElementById('n-chal-nama').textContent = 'no challenge yet';
         document.getElementById('n-chal-selesai').textContent = '0';
         document.getElementById('n-chal-target').textContent = '/ 0';
-        document.getElementById('n-chal-info').innerHTML = '<i class="bi bi-bullseye"></i> click edit to create';
+        // document.getElementById('n-chal-info').innerHTML = '<i class="bi bi-bullseye"></i> click edit to create';
         return;
     }
 
@@ -265,6 +273,11 @@ function gambarRak() {
         : '<p class="text-gray fs-13 mb-0">no books here yet.</p>';
 
     const kandidat = libBuku.filter(b => b.status === 'wishlist' || b.status === 'tbr');
+
+    const tombolPick = document.getElementById('btn-pick');
+    tombolPick.disabled = kandidat.length === 0;
+    tombolPick.title = kandidat.length > 0 ? '' : 'add a TBR or wishlist book first.';
+    
     const kartu = document.getElementById('curated-card');
 
     if (kandidat.length === 0) {
@@ -397,6 +410,7 @@ async function simpanModalBuku(e) {
     const seriDipilih = document.getElementById('f-seri').value;
 
     const dataBaru = {
+        action: 'simpan-buku',
         book_id: this.dataset.id,
         status: document.getElementById('f-status').value,
         rating: Number(document.getElementById('f-rating').value),
@@ -413,7 +427,7 @@ async function simpanModalBuku(e) {
         collection_baru: pilihKoleksiBaru
     };
 
-    const ok = await kirimPOST('../library/update_book.php', dataBaru);
+    const ok = await kirimPOST('../library/api.php', dataBaru);
     if (ok) {
         bootstrap.Modal.getInstance(document.getElementById('modal-buku')).hide();
         tampilToast('Book changes saved.');
@@ -629,7 +643,7 @@ document.getElementById('btn-hapus-buku').addEventListener('click', async functi
     const id = document.getElementById('form-buku').dataset.id;
     if (!confirm('Remove this book from your shelf? The book data will stay in the database.')) return;
 
-    const ok = await kirimPOST('../library/update_book.php', { action: 'hapus', book_id: id });
+    const ok = await kirimPOST('../library/api.php', { action: 'hapus-buku', book_id: id });
     if (ok) {
         bootstrap.Modal.getInstance(document.getElementById('modal-buku')).hide();
         tampilToast('Book removed from shelf.');
@@ -661,7 +675,7 @@ document.getElementById('form-log').addEventListener('submit', async function (e
     const tombol = this.querySelector('button[type="submit"]');
     setLoading(tombol, true);
 
-    const ok = await kirimPOST('../library/action_book.php', {
+    const ok = await kirimPOST('../library/api.php', {
         action: 'log-harian',
         book_id: logBukuId,
         pages: halaman,
@@ -688,5 +702,8 @@ setTime();
 setInterval(setTime, 60000);
 
 document.getElementById('judul-chal').textContent = new Date().getFullYear() + ' challenge';
+
+window.addEventListener('buku-berubah', muatDashboard);
+window.addEventListener('cari-ditutup', muatDashboard);
 
 muatDashboard();

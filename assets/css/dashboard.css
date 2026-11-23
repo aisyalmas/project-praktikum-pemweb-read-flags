@@ -432,3 +432,15 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: cover;
     border-radius: 3px 10px 10px 3px;
 }
+
+#btn-log-now:disabled {
+    background-color: var(--pink) !important;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#btn-pick:disabled {
+    background-color: var(--dark);
+    opacity: 0.5;
+    cursor: not-allowed;
+}

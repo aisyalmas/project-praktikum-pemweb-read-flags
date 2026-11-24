@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500;700;800&display=swap');
+
 :root {
     --sb-open: 260px;
     --sb-closed: 84px;
+    --font-main: "Roboto Mono", monospace;
+    --font-heading: "Bricolage Grotesque", sans-serif;
+    --cream: #FAF7F0; 
+    --stroke: #E9DFD3;
+    --dark: #3E0F2A;
+    --pink: #D94F7D;
+    --light-pink: #E99AB5;
+    --gray: #82777A;
 }
 
 .sidebar {
@@ -166,37 +177,52 @@
     justify-content: center;
 }
 
-.modal-header {
+[id^="modal-"] .modal-header {
     background-color: var(--dark);
     color: white;
     border-radius: 25px 25px 0 0;
 }
 
-.modal-body {
+[id^="modal-"] .modal-body {
     background-color: var(--cream);
 }
 
-.modal-content {
+[id^="modal-"] .modal-content {
     border-radius: 25px;
 }
 
-.modal-tab {
+[id^="modal-"] .modal-tab {
     color: var(--gray);
     font-family: var(--font-main);
 }
 
-.modal-tab:hover {
+[id^="modal-"] .modal-tab:hover {
     color: var(--pink);
     font-family: var(--font-main);
 }
 
-.modal-tab.active {
+[id^="modal-"] .modal-tab.active {
     color: var(--dark);
     font-family: var(--font-main);
 }
 
-.modal-tab.active {
+[id^="modal-"] .modal-tab.active {
     border-bottom-color: var(--pink) !important;
+}
+
+#modal-cari, nav {
+    font-family: var(--font-main);
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+#modal-cari h5 {
+    font-family: var(--font-heading);
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

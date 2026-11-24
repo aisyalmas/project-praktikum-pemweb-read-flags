@@ -1,3 +1,14 @@
+<?php
+session_start();
+include '../config/koneksi.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("location: ../auth/login.php");
+    exit();
+}
+$userId = (int) $_SESSION['user_id'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +98,9 @@
                                 <div class="row mt-2">
                                     <div class="col">
                                         <button type="button" id="btn-log-now" class="btn btn-pink fs-13 fw-semibold"><i class="bi bi-check2" style="font-size: 20px !important; padding-right: 5px;"></i> log pages</button>
-                                        <button type="button" class="btn btn-outline fs-13 fw-semibold"><i class="bi bi-plus" style="font-size: 20px !important; padding-right: 2px;"></i> add review</button>
+                                        <a href="../review/review.php?action=add" class="btn btn-outline fs-13 fw-semibold">
+                                            <i class="bi bi-plus" style="font-size: 20px !important; padding-right: 2px;"></i> add review
+                                        </a>
                                     </div>
                                 </div>
 

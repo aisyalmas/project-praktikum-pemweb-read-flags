@@ -1,3 +1,14 @@
+<?php
+session_start();
+include '../config/koneksi.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("location: ../auth/login.php");
+    exit();
+}
+$userId = (int) $_SESSION['user_id'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

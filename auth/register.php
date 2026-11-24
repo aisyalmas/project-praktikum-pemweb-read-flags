@@ -1,5 +1,4 @@
-<?php
-    //  INISIALISASI SESSION & AMBIL DATA DARI SESSION 
+<?php 
     session_start(); 
 
     // Ambil error general dari session 
@@ -15,7 +14,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register Page</title>
+    <title>Register | Read Flags</title>
     <link rel="icon" type="image/png" href="../assets/images/logo.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -31,7 +30,7 @@
             
             <div class="login-container p-4 rounded-4 ">
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="backToback">back</a> 
+                    <a href="../index.php" class="backToback">back</a> 
                     <a href="login.php" class="signInInstead">sign in instead</a> 
                 </div>
                 <header class="m-2">

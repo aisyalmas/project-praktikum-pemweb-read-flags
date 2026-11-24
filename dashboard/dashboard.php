@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 $userId = (int) $_SESSION['user_id'];
+$userName = $_SESSION['user_name'];
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +31,7 @@ $userId = (int) $_SESSION['user_id'];
     <main class="main-content">
         <div class="container p-0">
             <p class="mb-0 text-gray fs-13" id="tanggal-hari"></p>
-            <h2 class="mb-3">good morning, reader <span class="text-pink">✦</span></h2>
+            <h2 class="mb-3">good morning, <?= $userName ? $userName : 'reader' ?> <span class="text-pink">✦</span></h2>
 
             <div class="container-card">
                 <div class="row">

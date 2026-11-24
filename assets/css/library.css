@@ -56,3 +56,10 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
+.nav .lib-tab .badge {
+    color: var(--gray) !important;
+}
+
+.nav .lib-tab.active .badge {
+    color: var(--dark) !important;
+}

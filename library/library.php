@@ -49,10 +49,10 @@ $userId = (int) $_SESSION['user_id'];
                             </div>
                         </form>
 
-                        <button type="button" class="btn btn-dark rounded-pill px-4 text-nowrap"
+                        <!-- <button type="button" class="btn btn-dark rounded-pill px-4 text-nowrap"
                             data-bs-toggle="offcanvas" data-bs-target="#filters" aria-controls="filters">
                             <i class="bi bi-sliders me-2"></i>Filters
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
@@ -70,27 +70,27 @@ $userId = (int) $_SESSION['user_id'];
             <ul class="nav nav-underline border-bottom mb-3">
                 <li class="nav-item">
                     <a class="nav-link lib-tab active" href="#" data-tab="books">
-                        books <span class="badge" data-count="books">0</span>
+                        books •<span class="badge" data-count="books">0</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link lib-tab" href="#" data-tab="series">
-                        series <span class="badge" data-count="series">0</span>
+                        series •<span class="badge" data-count="series">0</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link lib-tab" href="#" data-tab="authors">
-                        authors <span class="badge" data-count="authors">0</span>
+                        authors •<span class="badge" data-count="authors">0</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link lib-tab" href="#" data-tab="collections">
-                        collections <span class="badge" data-count="collections">0</span>
+                        collections •<span class="badge" data-count="collections">0</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link lib-tab" href="#" data-tab="wishlist">
-                        wishlist <span class="badge" data-count="wishlist">0</span>
+                        wishlist •<span class="badge" data-count="wishlist">0</span>
                     </a>
                 </li>
                 <li class="nav-item ms-auto d-none d-md-block">
